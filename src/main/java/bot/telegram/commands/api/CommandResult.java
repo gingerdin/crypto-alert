@@ -2,7 +2,6 @@
  CONFIDENTIAL AND TRADE SECRET INFORMATION. No portion of this work may be copied, distributed, modified, or incorporated into any other media without EIS Group prior written consent.*/
 package bot.telegram.commands.api;
 
-import org.telegram.telegrambots.api.methods.send.SendMessage;
 
 /**
  * @author dlevchuk

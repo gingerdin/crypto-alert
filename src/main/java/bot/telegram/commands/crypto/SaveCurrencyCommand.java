@@ -7,7 +7,7 @@ import bot.telegram.api.CryptoBot;
 import bot.telegram.commands.api.DefaultTransitionBotCommand;
 import bot.telegram.commands.api.Transition;
 import bot.telegram.db.api.DatabaseManager;
-import org.telegram.telegrambots.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.Update;
 
 /**
  * @author dlevchuk

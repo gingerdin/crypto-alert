@@ -9,10 +9,10 @@ import bot.telegram.commands.api.DefaultBotCommand;
 import com.idiot.currency.BnbrbService;
 import com.idiot.currency.Currency;
 import com.idiot.currency.ExchangeRateService;
-import org.telegram.telegrambots.api.methods.send.SendMessage;
-import org.telegram.telegrambots.api.objects.Update;
-import org.telegram.telegrambots.bots.AbsSender;
-import org.telegram.telegrambots.exceptions.TelegramApiException;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 /**
  * @author dlevchuk

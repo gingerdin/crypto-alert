@@ -5,7 +5,8 @@ package bot.telegram.commands.crypto;
 import bot.telegram.Commands;
 import bot.telegram.commands.api.CommandRegistry;
 import bot.telegram.commands.api.DefaultBotCommand;
-import org.telegram.telegrambots.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.Update;
+
 
 /**
  * @author dlevchuk

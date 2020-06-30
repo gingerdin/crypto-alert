@@ -3,6 +3,8 @@
 package bot.telegram.api;
 
 import java.util.Arrays;
+import java.util.List;
+
 import bot.telegram.Commands;
 import bot.telegram.commands.HomeCommand;
 import bot.telegram.commands.TranstionBotCommandRegistry;
@@ -16,10 +18,10 @@ import bot.telegram.commands.crypto.SaveTimerCommand;
 import bot.telegram.commands.crypto.ShowAllCommand;
 import bot.telegram.db.api.DatabaseManager;
 import bot.telegram.db.api.InMemoryDatabase;
-import org.telegram.telegrambots.api.methods.send.SendMessage;
-import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.exceptions.TelegramApiException;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 /**
  * @author dlevchuk
@@ -43,17 +45,24 @@ public class CryptoBot extends TelegramLongPollingBot implements CommandAwareBot
     }
 
     @Override
+    public void onUpdateReceived(Update update) {
+        BOT_NAME_HOLDER.set(getBotUsername());
+        InMemoryDatabase.State state = DatabaseManager.getInstance().getBotState(getBotUsername(), update.getMessage().getChat().getUserName(), update.getMessage().getChatId());
+        actionOnState(update, state);
+    }
+
+    @Override
+    public void onUpdatesReceived(List<Update> updates) {
+
+    }
+
+    @Override
     public String getBotUsername() {
         return "iDiotCryptoAlertBot";
         //возвращаем юзера
     }
 
-    @Override
-    public void onUpdateReceived(Update e) {
-        BOT_NAME_HOLDER.set(getBotUsername());
-        InMemoryDatabase.State state = DatabaseManager.getInstance().getBotState(getBotUsername(), e.getMessage().getChat().getUserName(), e.getMessage().getChatId());
-        actionOnState(e, state);
-    }
+
 
     private void actionOnState(Update e, InMemoryDatabase.State state) {
         String commandText = e.getMessage().getText();

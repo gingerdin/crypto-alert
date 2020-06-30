@@ -8,9 +8,9 @@ import bot.telegram.commands.api.DefaultTransitionBotCommand;
 import bot.telegram.commands.api.Transition;
 import bot.telegram.db.api.DatabaseManager;
 import bot.telegram.db.api.InMemoryDatabase;
-import org.telegram.telegrambots.api.methods.send.SendMessage;
-import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Update;
 
 /**
  * @author dlevchuk

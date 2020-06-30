@@ -6,7 +6,7 @@ import java.util.Arrays;
 import bot.telegram.Commands;
 import bot.telegram.commands.api.DefaultTransitionBotCommand;
 import bot.telegram.commands.api.Transition;
-import org.telegram.telegrambots.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.Update;
 
 /**
  * @author dlevchuk
