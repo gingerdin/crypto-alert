@@ -10,7 +10,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
  */
 public abstract class DefaultBotCommand implements BotCommand {
 
-    protected abstract String executeAction(Update e);
+    protected abstract String executeAction(Update update);
 
     @Override
     public SendMessage execute(Update e) {

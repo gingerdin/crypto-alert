@@ -33,8 +33,8 @@ public class CryptoRateCommand extends DefaultBotCommand {
     }
 
     @Override
-    protected String executeAction(Update e) {
-        InMemoryDatabase.State state = DatabaseManager.getInstance().getBotState(sender.getBotUsername(), e.getMessage().getChat().getUserName(), e.getMessage().getChatId());
+    protected String executeAction(Update update) {
+        InMemoryDatabase.State state = DatabaseManager.getInstance().getBotState(sender.getBotUsername(), update.getMessage().getChat().getUserName(), update.getMessage().getChatId());
 
         // (milliseconds in minute) * minutes
         long timerInMls = 60000 * state.getTimer();
@@ -47,7 +47,7 @@ public class CryptoRateCommand extends DefaultBotCommand {
                     throw new IllegalStateException("Sender cannot be null");
                 }
                 try {
-                    sender.execute(rateMessage(e, state.getSelectedCurrency()));
+                    sender.execute(rateMessage(update, state.getSelectedCurrency()));
                 } catch (TelegramApiException e1) {
                     e1.printStackTrace();
                 }
@@ -56,7 +56,7 @@ public class CryptoRateCommand extends DefaultBotCommand {
 
         String message = "Crypto alert configured. " + state.getSelectedCurrency() + " every " + state.getTimer() + " minutes. Step[3/3] Ready!";
 
-        new ClearStateCommand().execute(e);
+        new ClearStateCommand().execute(update);
 
         return message;
     }

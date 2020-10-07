@@ -24,13 +24,13 @@ public class SaveCurrencyCommand extends DefaultTransitionBotCommand {
     }
 
     @Override
-    protected String executeAction(Update e) {
-        String message = e.getMessage().getText();
+    protected String executeAction(Update update) {
+        String message = update.getMessage().getText();
 
         DatabaseManager.getInstance().setSelectedCurrency(
                 CryptoBot.BOT_NAME_HOLDER.get(),
-                e.getMessage().getChat().getUserName(),
-                e.getMessage().getChatId(),
+                update.getMessage().getChat().getUserName(),
+                update.getMessage().getChatId(),
                 message.substring(1, message.length()));
 
         return "Great, " + message.substring(1, message.length()) + "\n\nNow please send interval in minutes for the timer [Step 2/3]";

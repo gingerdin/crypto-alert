@@ -18,6 +18,7 @@ import bot.telegram.commands.crypto.SaveTimerCommand;
 import bot.telegram.commands.crypto.ShowAllCommand;
 import bot.telegram.db.api.DatabaseManager;
 import bot.telegram.db.api.InMemoryDatabase;
+import dl.bot.telegram.url.parser.command.UrlParserCommand;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -35,6 +36,18 @@ public class CryptoBot extends TelegramLongPollingBot implements CommandAwareBot
     public CryptoBot() {
         this.commandRegistry = new TranstionBotCommandRegistry();
 
+        /**
+         * 1 - Home -> 1
+         * 2 - Home -> 1
+         * 3 - Home -> 1
+         * 1 - NewAlert -> 2
+         * 2 - All currencies -> 2
+         * 2 - Save Currency -> 3
+         * 3 - Save Timer -> 1
+         *
+         *
+         */
+
         this.commandRegistry.register(new NewAlertCommand(new Transition(1, 2)));
         this.commandRegistry.register(2,  new ShowAllCommand(new Transition(2, 2)));
 
@@ -42,6 +55,12 @@ public class CryptoBot extends TelegramLongPollingBot implements CommandAwareBot
 
         this.commandRegistry.register(new SaveTimerCommand(this, new Transition(3, 1)));
         this.commandRegistry.registerForAllStates(new HomeCommand(commandRegistry, new Transition(1, 1)));
+
+
+
+        this.commandRegistry.registerForAllStates(new UrlParserCommand(null, new Transition(1, 1)));
+
+        this.commandRegistry.register();
     }
 
     @Override
@@ -53,7 +72,8 @@ public class CryptoBot extends TelegramLongPollingBot implements CommandAwareBot
 
     @Override
     public void onUpdatesReceived(List<Update> updates) {
-
+        updates.stream()
+                .forEach(this::onUpdateReceived);
     }
 
     @Override
@@ -64,16 +84,16 @@ public class CryptoBot extends TelegramLongPollingBot implements CommandAwareBot
 
 
 
-    private void actionOnState(Update e, InMemoryDatabase.State state) {
-        String commandText = e.getMessage().getText();
+    private void actionOnState(Update update, InMemoryDatabase.State state) {
+        String commandText = update.getMessage().getText();
 
         TransitionBotCommand command = commandRegistry.getCommand(state.getState(), commandText);
         if (command != null) {
-            SendMessage message = command.execute(e);
+            SendMessage message = command.execute(update);
             if (message != null) {
                 try {
                     execute(message);
-                    DatabaseManager.getInstance().setBotState(getBotUsername(), e.getMessage().getChat().getUserName(), e.getMessage().getChatId(), command.getTransition().getNextState());
+                    DatabaseManager.getInstance().setBotState(getBotUsername(), update.getMessage().getChat().getUserName(), update.getMessage().getChatId(), command.getTransition().getNextState());
                 } catch (TelegramApiException e1) {
                     e1.printStackTrace();
                 }

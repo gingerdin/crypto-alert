@@ -32,8 +32,8 @@ public class HomeCommand extends DefaultTransitionBotCommand {
     }
 
     @Override
-    protected String executeAction(Update e) {
-        new ClearStateCommand().execute(e);
+    protected String executeAction(Update update) {
+        new ClearStateCommand().execute(update);
 
         StringBuilder helpMessageBuilder = new StringBuilder("<b>Home</b>\n");
         helpMessageBuilder.append("These are the registered commands for this Bot:\n\n");

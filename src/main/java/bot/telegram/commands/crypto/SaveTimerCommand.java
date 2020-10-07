@@ -30,18 +30,18 @@ public class SaveTimerCommand extends DefaultTransitionBotCommand {
     }
 
     @Override
-    protected String executeAction(Update e) {
+    protected String executeAction(Update update) {
         int timer;
         try {
-            timer = Integer.parseInt(e.getMessage().getText());
+            timer = Integer.parseInt(update.getMessage().getText());
 
         } catch (NumberFormatException ex) {
             return "Wrong timer format";
         }
 
-        DatabaseManager.getInstance().setTimer(CryptoBot.BOT_NAME_HOLDER.get(), e.getMessage().getChat().getUserName(), e.getMessage().getChatId(), timer);
+        DatabaseManager.getInstance().setTimer(CryptoBot.BOT_NAME_HOLDER.get(), update.getMessage().getChat().getUserName(), update.getMessage().getChatId(), timer);
 
-        InMemoryDatabase.State state = DatabaseManager.getInstance().getBotState(CryptoBot.BOT_NAME_HOLDER.get(), e.getMessage().getChat().getUserName(), e.getMessage().getChatId());
+        InMemoryDatabase.State state = DatabaseManager.getInstance().getBotState(CryptoBot.BOT_NAME_HOLDER.get(), update.getMessage().getChat().getUserName(), update.getMessage().getChatId());
 
         return "For " + state.getSelectedCurrency() + ", timer is " + timer;
     }

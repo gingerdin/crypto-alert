@@ -22,7 +22,7 @@ public class NewAlertCommand extends DefaultTransitionBotCommand {
     }
 
     @Override
-    protected String executeAction(Update e) {
+    protected String executeAction(Update update) {
         StringBuilder chooseMessage = new StringBuilder("<b>Type currency name(e.g. /tron) [Step 1/3]</b>\n\n");
         chooseMessage.append(Commands.CRYPTO_SHOW_ALL);
 

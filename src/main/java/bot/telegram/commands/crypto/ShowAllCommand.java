@@ -23,7 +23,7 @@ public class ShowAllCommand extends DefaultTransitionBotCommand {
     }
 
     @Override
-    protected String executeAction(Update e) {
+    protected String executeAction(Update update) {
         StringBuilder all = new StringBuilder("<b>All crypto currencies</b>\n\n");
         Arrays.stream(Currency.values())
                 .forEach(currency -> all.append(Commands.COMMAND_PREFIX + currency.toString() + " "));

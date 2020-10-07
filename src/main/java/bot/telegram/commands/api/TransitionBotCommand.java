@@ -3,6 +3,8 @@
 package bot.telegram.commands.api;
 
 /**
+ * Bot command that supports {@link Transition}
+ *
  * @author dlevchuk
  */
 public interface TransitionBotCommand extends BotCommand {

@@ -19,8 +19,8 @@ public class ClearStateCommand extends DefaultBotCommand {
     }
 
     @Override
-    protected String executeAction(Update e) {
-        DatabaseManager.getInstance().clearState(CryptoBot.BOT_NAME_HOLDER.get(), e.getMessage().getChat().getUserName(), e.getMessage().getChatId());
+    protected String executeAction(Update update) {
+        DatabaseManager.getInstance().clearState(CryptoBot.BOT_NAME_HOLDER.get(), update.getMessage().getChat().getUserName(), update.getMessage().getChatId());
         return "";
     }
 

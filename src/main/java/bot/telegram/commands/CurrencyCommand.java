@@ -37,7 +37,7 @@ public class CurrencyCommand extends DefaultBotCommand {
     }
 
     @Override
-    protected String executeAction(Update e) {
+    protected String executeAction(Update update) {
         return null;
     }
 
