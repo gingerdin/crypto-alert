@@ -20,7 +20,7 @@ import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
 
-import java.util.Arrays;
+import java.util.stream.Stream;
 
 /**
  * Timer executor
@@ -87,12 +87,17 @@ public class Main {
         commandRegistry.register(new NewAlertCommand(botNameProvider, new Transition(1, 2)));
         commandRegistry.register(2,  new ShowAllCommand(botNameProvider, new Transition(2, 2)));
 
-        Arrays.stream(Currency.values()).forEach(currency -> commandRegistry.register(Commands.COMMAND_PREFIX + currency.toString(), new SaveCurrencyCommand(botNameProvider, new Transition(2, 3))));
+        Stream.of(Currency.values())
+                .forEach(currency -> commandRegistry.register(Commands.COMMAND_PREFIX + currency.toString(),
+                        new SaveCurrencyCommand(botNameProvider, new Transition(2, 3))));
 
+        // Commented during refactoring, as there were no quick possibility to inject the bot to the command
 //        commandRegistry.register(new SaveTimerCommand(this, new Transition(3, 1)));
-        commandRegistry.registerForAllStates(new HomeCommand(botNameProvider, commandRegistry, new Transition(1, 1)));
+        commandRegistry.registerForAllStates(new HomeCommand(botNameProvider, commandRegistry,
+                new Transition(1, 1)));
 
-        commandRegistry.registerForAllStates(new UrlParserCommand(botNameProvider,null, new Transition(1, 1)));
+        commandRegistry.registerForAllStates(new UrlParserCommand(botNameProvider,null,
+                new Transition(1, 1)));
 
         commandRegistry.register();
 
