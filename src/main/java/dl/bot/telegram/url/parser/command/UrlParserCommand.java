@@ -1,13 +1,12 @@
 package dl.bot.telegram.url.parser.command;
 
-import bot.telegram.Commands;
-import bot.telegram.commands.api.DefaultTransitionBotCommand;
-import bot.telegram.commands.api.Transition;
+import bot.telegram.crypto.Commands;
+import bot.telegram.impl.state.machine.DefaultTransitionBotCommand;
+import bot.telegram.api.state.machine.Transition;
 import com.google.gson.JsonObject;
 import dl.bot.telegram.url.parser.ContainsUrl;
 import dl.bot.telegram.url.parser.api.Url;
 import dl.bot.telegram.url.parser.api.UrlParserProvider;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
@@ -15,8 +14,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author dlevchuk

@@ -1,15 +1,15 @@
 /* Copyright © 2016 EIS Group and/or one of its affiliates. All rights reserved. Unpublished work under U.S. copyright laws.
  CONFIDENTIAL AND TRADE SECRET INFORMATION. No portion of this work may be copied, distributed, modified, or incorporated into any other media without EIS Group prior written consent.*/
-package bot.telegram.api;
+package bot.telegram.api.state.machine;
 
-import bot.telegram.api.commands.CommandRegistry;
+import bot.telegram.api.commands.BotCommand;
 
 /**
- * Interface that each bot that contains command registry should follow
+ * Bot command that supports {@link Transition}
  *
  * @author dlevchuk
  */
-public interface CommandAwareBot {
+public interface TransitionBotCommand extends BotCommand {
 
-    CommandRegistry getCommandRegistry();
+    Transition getTransition();
 }

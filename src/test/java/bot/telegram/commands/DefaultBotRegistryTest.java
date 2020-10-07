@@ -4,11 +4,13 @@ package bot.telegram.commands;
 
 import java.util.List;
 import java.util.Map;
-import bot.telegram.commands.api.BotCommand;
-import bot.telegram.commands.api.Transition;
-import bot.telegram.commands.api.TransitionBotCommand;
-import bot.telegram.commands.crypto.SaveTimerCommand;
-import bot.telegram.commands.crypto.ShowAllCommand;
+
+import bot.telegram.api.state.machine.Transition;
+import bot.telegram.api.state.machine.TransitionBotCommand;
+import bot.telegram.crypto.commands.SaveTimerCommand;
+import bot.telegram.crypto.commands.ShowAllCommand;
+import bot.telegram.impl.commands.HomeCommand;
+import bot.telegram.impl.state.machine.TranstionBotCommandRegistry;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
